@@ -12,7 +12,7 @@ public class Entity2 implements Visitee {
 	@Getter private final String b;
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public <E> E accept(Visitor<E> visitor) {
+		return visitor.visit(this);
 	}
 }

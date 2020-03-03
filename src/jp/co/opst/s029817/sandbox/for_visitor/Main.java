@@ -2,6 +2,7 @@ package jp.co.opst.s029817.sandbox.for_visitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jp.co.opst.s029817.sandbox.for_visitor.entity.Entity1;
 import jp.co.opst.s029817.sandbox.for_visitor.entity.Entity2;
@@ -9,21 +10,24 @@ import jp.co.opst.s029817.sandbox.for_visitor.entity.Entity3;
 import jp.co.opst.s029817.sandbox.for_visitor.visitor.HashCodeVisitor;
 import jp.co.opst.s029817.sandbox.for_visitor.visitor.ToStringVisitor;
 
+/**
+ * Visitorパターンの演習。
+ */
 public class Main {
 
 	public static void main(String[] args) {
 		var me = new Main();
 
 		System.out.println("ToStringVisitor");
-		me.accept(new ToStringVisitor()).getResults().forEach(System.out::println);
+		me.accept(new ToStringVisitor()).forEach(System.out::println);
 		System.out.println();
 
 		System.out.println("HashCodeVisitor");
-		me.accept(new HashCodeVisitor()).getResults().forEach(System.out::println);
+		me.accept(new HashCodeVisitor()).forEach(System.out::println);
 		System.out.println();
 	}
 
-	private List<Visitee> visities = new ArrayList<>();
+	private final List<Visitee> visities = new ArrayList<>();
 
 	public Main() {
 		visities.add(new Entity1(1));
@@ -37,8 +41,7 @@ public class Main {
 		visities.add(new Entity3(3, "baz", true));
 	}
 
-	public <E extends Visitor> E accept(E visitor) {
-		visities.stream().forEach(e -> e.accept(visitor));
-		return visitor;
+	public <E> List<E> accept(Visitor<E> visitor) {
+		return visities.stream().map(e -> e.accept(visitor)).collect(Collectors.toList());
 	}
 }
