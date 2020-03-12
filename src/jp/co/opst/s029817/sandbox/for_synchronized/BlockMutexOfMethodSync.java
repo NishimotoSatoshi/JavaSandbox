@@ -11,10 +11,10 @@ package jp.co.opst.s029817.sandbox.for_synchronized;
  * 検証してみた。
  * </p>
  */
-public class Main {
+public class BlockMutexOfMethodSync {
 
 	public static void main(String[] args) throws Exception {
-		var me = new Main();
+		var me = new BlockMutexOfMethodSync();
 
 		// ロックに成功するため、5秒かかる。
 		System.out.println("Lock by me.");
@@ -23,7 +23,7 @@ public class Main {
 
 		// ロックに失敗するため、5秒かからない。
 		System.out.println("Lock by other instance.");
-		me.test(new Main());
+		me.test(new BlockMutexOfMethodSync());
 	}
 
 	private Runnable runnable = new Runnable() {
