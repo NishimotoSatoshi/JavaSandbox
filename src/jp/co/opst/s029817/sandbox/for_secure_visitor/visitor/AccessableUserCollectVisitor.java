@@ -1,5 +1,6 @@
 package jp.co.opst.s029817.sandbox.for_secure_visitor.visitor;
 
+import jp.co.opst.s029817.sandbox.for_secure_visitor.core.SecureVisitorBase;
 import jp.co.opst.s029817.sandbox.for_secure_visitor.entity.Credentials;
 import jp.co.opst.s029817.sandbox.for_secure_visitor.entity.UserEntity;
 

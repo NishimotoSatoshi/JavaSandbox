@@ -10,6 +10,9 @@ import lombok.Value;
 @Value
 public final class UserEntity {
 
+	/** アクセスに必要な権限レベル。 */
+	private final int level;
+
 	/** 名前。 */
 	private final String name;
 }

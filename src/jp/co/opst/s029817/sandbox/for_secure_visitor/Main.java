@@ -35,11 +35,11 @@ public class Main {
 
 	public Main() {
 		var nodeList = new ArrayList<TopEntity>();
-		nodeList.add(new TopEntity(1, new UserEntity("name1")));
-		nodeList.add(new TopEntity(2, new UserEntity("name2")));
-		nodeList.add(new TopEntity(3, new UserEntity("name3")));
-		nodeList.add(new TopEntity(4, new UserEntity("name4")));
-		nodeList.add(new TopEntity(5, new UserEntity("name5")));
+		nodeList.add(new TopEntity(new UserEntity(1, "name1")));
+		nodeList.add(new TopEntity(new UserEntity(2, "name2")));
+		nodeList.add(new TopEntity(new UserEntity(3, "name3")));
+		nodeList.add(new TopEntity(new UserEntity(4, "name4")));
+		nodeList.add(new TopEntity(new UserEntity(5, "name5")));
 		this.nodeList = Collections.unmodifiableList(nodeList);
 	}
 }

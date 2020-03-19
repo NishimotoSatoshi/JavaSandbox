@@ -2,7 +2,7 @@ package jp.co.opst.s029817.sandbox.for_secure_visitor.entity;
 
 import java.util.Optional;
 
-import lombok.AllArgsConstructor;
+import jp.co.opst.s029817.sandbox.for_secure_visitor.core.Strongbox;
 
 /**
  * セキュアビジターで扱うエンティティ。
@@ -10,14 +10,19 @@ import lombok.AllArgsConstructor;
  * @see Credentials
  * @see UserEntity
  */
-@AllArgsConstructor
 public final class TopEntity {
 
-	/** ユーザー情報の取得に必要な権限レベル。 */
-	private final int level;
-
 	/** ユーザー情報。 */
-	private final UserEntity user;
+	private final Strongbox<UserEntity, Credentials> userEntity;
+
+	/**
+	 * コンストラクタ。
+	 * 
+	 * @param userEntity ユーザー情報
+	 */
+	public TopEntity(UserEntity userEntity) {
+		this.userEntity = new Strongbox<>(userEntity, (v, c) -> v.getLevel() <= c.getLevel());
+	}
 
 	/**
 	 * ユーザー情報を取得します。
@@ -26,6 +31,6 @@ public final class TopEntity {
 	 * @return ユーザー情報（権限がなかった場合はエンプティ）
 	 */
 	public Optional<UserEntity> getUser(Credentials credentials) {
-		return Optional.of(user).filter(v -> credentials.getLevel() >= level);
+		return userEntity.unlock(credentials);
 	}
 }
